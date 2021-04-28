@@ -2,8 +2,11 @@ const express = require('express');
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('HELLO WORL');
-});
+app.use(express.static(__dirname + '/../public'));
 
-module.exports = app;
+const http = require('http').createServer(app);
+
+const socket = require('./socket')
+socket(http);
+
+module.exports = http;
